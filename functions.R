@@ -42,16 +42,20 @@ nameStats <- function(agetable) {
 
 nameStatsText <- function(name, stats) {
   list(
-    born = paste("There have been", stats$total_born, plural(name), "born since 1900."),
-    alive = paste("There are an estimated", stats$alive, plural(name), "alive today."),
+    born = paste("There have been", fnum(stats$total_born), plural(name), "born since 1900."),
+    alive = paste("There are an estimated", fnum(stats$alive), plural(name), "alive today."),
     median_age = paste("The median living", name, "is", stats$median_age, "years old."),
     peak = paste("The most number of", plural(name), "ever born in a year was in", 
-                 stats$peak_year, "with", stats$peak_born, plural(name), "born.")
+                 stats$peak_year, "with", fnum(stats$peak_born), plural(name), "born.")
   )
 }
 
 plural <- function(n) {
   paste0(n, "s")
+}
+
+fnum <- function(num) {
+  prettyNum(num, big.mark=",")
 }
 
 gcolor <- function(g) {
