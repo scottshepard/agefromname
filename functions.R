@@ -20,13 +20,13 @@ ziggerZagger <- function(agetable) {
   gender <- removeNA(unique(agetable$sex))
   name <- removeNA(unique(agetable$name))
   median <- dplyr::filter(agetable, median == T)[, "age"]
-  ggplot(agetable) + 
+  ggplot(agetable, aes(x=year)) + 
     theme_fivethirtyeight() +
-    theme(legend.position="none") +
-    geom_bar(aes(x=year, y=n_alive, alpha=median, fill=median), stat="identity") +
+    theme(legend.position="right", legend.title=element_blank()) +
+    geom_bar(aes(y=n_alive, fill="Born that year \nstill alive today"), alpha=0.75, stat="identity") +
     scale_fill_manual(values=gcolor(gender)) +
-    scale_alpha_manual(values = c(0.75, 1)) +
-    geom_line(aes(x=year, y=n), lwd=2) + 
+    geom_line(aes(y=n, color="Born each year"), lwd=2) + 
+    scale_color_manual(values="black") +
     ggtitle(paste("Age Distribution of American", boysOrGirls(gender), "named", name))
 }
 
