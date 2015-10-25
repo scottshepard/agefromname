@@ -1,8 +1,7 @@
 library(shiny)
+library(shinythemes)
 
-library(shiny)
-
-shinyUI(fluidPage(
+shinyUI(fluidPage(theme = shinytheme("united"),
   
   titlePanel("How Old is that Name?"),
   
@@ -14,7 +13,12 @@ shinyUI(fluidPage(
     ),
     
     mainPanel(
-      plotOutput("zigger_zagger")
+      plotOutput("zigger_zagger"),
+      HTML("</br>"),
+      textOutput("born"),
+      textOutput("alive"),
+      textOutput("median_age"),
+      textOutput("peak")
     )
   )
 ))

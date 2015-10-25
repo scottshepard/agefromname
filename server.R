@@ -9,10 +9,15 @@ library(cwhmisc)
 source("functions.R")
 
 shinyServer(function(input, output) {
-    
   observeEvent(input$go, {
     age_table <- ageTableFor(input$name, input$sex)
     zigger_zagger <- ziggerZagger(age_table)
     output$zigger_zagger <- renderPlot(zigger_zagger)
+    
+    name_stats_text <- nameStatsText(input$name, nameStats(age_table))
+    output$born <- renderText(name_stats_text$born)
+    output$alive <- renderText(name_stats_text$alive)
+    output$median_age <- renderText(name_stats_text$median_age)
+    output$peak <- renderText(name_stats_text$peak)
   })
 })

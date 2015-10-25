@@ -30,6 +30,29 @@ ziggerZagger <- function(agetable) {
     ggtitle(paste("Age Distribution of American", boysOrGirls(gender), "named", name))
 }
 
+nameStats <- function(agetable) {
+  list(
+    median_age = filter(agetable, median == T)[, "age"],
+    peak_born = max(agetable$n, na.rm=T),
+    peak_year = last(filter(agetable, n == max(agetable$n, na.rm=T))[, "year"]),
+    total_born = sum(agetable$n, na.rm=T),
+    alive = sum(agetable$n_alive, na.rm=T)
+  )
+}
+
+nameStatsText <- function(name, stats) {
+  list(
+    born = paste("There have been", stats$total_born, plural(name), "born since 1900."),
+    alive = paste("There are an estimated", stats$alive, plural(name), "alive today."),
+    median_age = paste("The median living", name, "is", stats$median_age, "years old."),
+    peak = paste("The most number of", plural(name), "ever born in a year was in", 
+                 stats$peak_year, "with", stats$peak_born, plural(name), "born.")
+  )
+}
+
+plural <- function(n) {
+  paste0(n, "s")
+}
 
 gcolor <- function(g) {
   if(g == "M") {
