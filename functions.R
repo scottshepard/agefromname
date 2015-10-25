@@ -4,8 +4,10 @@ library(ggplot2)
 library(ggthemes)
 library(ssalifetablesextended)
 library(cwhmisc)
+library(Hmisc)
 
 ageTableFor <- function(firstname, gender) {
+  firstname <- Hmisc::capitalize(tolower(firstname))
   name_table <- filter(babynames, name == firstname, sex == gender, year >= 1900)
   expectancy_table <- filter(prob_living_2014, sex == gender)
   df <- merge(name_table, expectancy_table, by=c("year", "sex"), all=T)
