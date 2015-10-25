@@ -24,7 +24,8 @@ ziggerZagger <- function(agetable) {
     theme_fivethirtyeight() +
     theme(legend.position="right", legend.title=element_blank()) +
     geom_bar(aes(y=n_alive, fill="Born that year \nstill alive today"), alpha=0.75, stat="identity") +
-    scale_fill_manual(values=gcolor(gender)) +
+    scale_fill_manual(values=gcolor(gender)[1]) +
+    geom_bar(data=filter(agetable, median == T), aes(y=n_alive), fill=gcolor(gender)[2], stat="identity") +
     geom_line(aes(y=n, color="Born each year"), lwd=2) + 
     scale_color_manual(values="black") +
     ggtitle(paste("Age Distribution of American", boysOrGirls(gender), "named", name))
