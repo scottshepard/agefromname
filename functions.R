@@ -16,14 +16,10 @@ ageTableFor <- function(firstname, gender) {
 }
 
 ziggerZagger <- function(agetable) {
+  if(is.null(agetable)) return(NULL)
   gender <- removeNA(unique(agetable$sex))
   name <- removeNA(unique(agetable$name))
-  median <- filter(agetable, median == T)[, "age"]
-  gcolor <- if(gender == "M") {
-    "dodgerblue"
-  } else if(gender == "F") {
-    "lightsalmon1"
-  }
+  median <- dplyr::filter(agetable, median == T)[, "age"]
   ggplot(agetable) + 
     theme_fivethirtyeight() +
     theme(legend.position="none") +
