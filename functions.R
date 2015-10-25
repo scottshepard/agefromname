@@ -23,7 +23,8 @@ ziggerZagger <- function(agetable) {
   ggplot(agetable) + 
     theme_fivethirtyeight() +
     theme(legend.position="none") +
-    geom_bar(aes(x=year, y=n_alive, alpha=median), stat="identity", fill=gcolor(gender)) +
+    geom_bar(aes(x=year, y=n_alive, alpha=median, fill=median), stat="identity") +
+    scale_fill_manual(values=gcolor(gender)) +
     scale_alpha_manual(values = c(0.75, 1)) +
     geom_line(aes(x=year, y=n), lwd=2) + 
     ggtitle(paste("Age Distribution of American", boysOrGirls(gender), "named", name))
@@ -32,9 +33,9 @@ ziggerZagger <- function(agetable) {
 
 gcolor <- function(g) {
   if(g == "M") {
-    "dodgerblue"
+    c("dodgerblue", "blue")
   } else if(g == "F") {
-    "lightsalmon1"
+    c("lightsalmon1", "red")
   }
 }
 
